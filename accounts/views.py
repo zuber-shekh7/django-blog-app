@@ -1,7 +1,25 @@
 from django.contrib import messages
 from django.shortcuts import redirect, render
+from django.contrib.auth import authenticate, login
+from .forms import UserRegisterForm, UserSignInForm
 
-from .forms import UserRegisterForm
+
+def signin(request):
+    form = UserSignInForm()
+    context = {
+        "form": form,
+    }
+    if request.method == 'POST':
+        form = UserSignInForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user:
+                login(request, user)
+                messages.success(request, f'{username} login successful')
+                return redirect('core:index')
+    return render(request, 'accounts/signin.html', context)
 
 
 def signup(request):

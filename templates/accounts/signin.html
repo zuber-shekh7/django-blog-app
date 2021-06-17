@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %} {% load crispy_forms_tags %} {% block main %}
+<section>
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <form method="POST">
+        <div class="card mt-4">
+          <div class="card-body">
+            {% csrf_token %}
+            <fieldset class="form-group">
+              <legend class="border-bottom mt-4">Sign in</legend>
+              {{form|crispy}}
+            </fieldset>
+            <div class="form-group">
+              <input class="btn btn-primary" type="submit" value="Sign in" />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock main %}
