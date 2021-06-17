@@ -227,5 +227,7 @@ Thumbs.db
 
 # profiling data
 
+# vscode settgins
+.vscode/
 
 # End of https://www.toptal.com/developers/gitignore/api/python,django
