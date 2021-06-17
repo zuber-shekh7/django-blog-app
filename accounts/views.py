@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import redirect, render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .forms import UserRegisterForm, UserSignInForm
 
 
@@ -35,3 +35,8 @@ def signup(request):
             messages.success(request, f'Account created for {username}')
             return redirect('core:index')
     return render(request, 'accounts/signup.html', context)
+
+
+def signout(request):
+    logout(request)
+    return redirect('accounts:signin')

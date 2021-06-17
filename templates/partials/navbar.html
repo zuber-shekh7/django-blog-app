@@ -21,7 +21,7 @@
       </li>
       {% if request.user.is_authenticated %}
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'accounts:signup' %}">Sign out</a>
+        <a class="nav-link" href="{% url 'accounts:signout' %}">Sign out</a>
       </li>
       {% else %}
       <li class="nav-item">
