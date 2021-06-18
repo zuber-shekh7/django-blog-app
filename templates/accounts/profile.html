@@ -14,14 +14,14 @@
       </form>
     </div>
     <div class="col-md-4">
-      <h2>welcome {{user.username}}</h2>
-      <h3>Email: {{user.email}}</h3>
       <img
-        style="height: 250px; width: 250px"
-        class="img-thumbnail"
+        style="height: 300px; width: 300px"
+        class="img-thumbnail rounded-circle"
         src="{{user.profile.image.url}}"
         alt="profile picture"
       />
+      <h2>welcome {{user.username}}</h2>
+      <h3>Email: {{user.email}}</h3>
     </div>
   </div>
 </section>
