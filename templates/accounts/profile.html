@@ -1,12 +1,28 @@
-{% extends 'core/base.html' %} {% block main %}
+{% extends 'core/base.html' %} {% load crispy_forms_tags %} {% block main %}
 <section>
-  <h2>welcome {{user.username}}</h2>
-  <h3>Email: {{user.email}}</h3>
-  <img
-    style="height: 250px; width: 250px"
-    class="img-thumbnail"
-    src="{{user.profile.image.url}}"
-    alt="profile picture"
-  />
+  <div class="row">
+    <div class="col-md-8">
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+          <legend class="border-bottom">Update Profile</legend>
+          {{user_form|crispy}} {{profile_form|crispy}}
+        </fieldset>
+        <div class="form-group">
+          <input class="btn btn-primary" type="Submit" value="Update" />
+        </div>
+      </form>
+    </div>
+    <div class="col-md-4">
+      <h2>welcome {{user.username}}</h2>
+      <h3>Email: {{user.email}}</h3>
+      <img
+        style="height: 250px; width: 250px"
+        class="img-thumbnail"
+        src="{{user.profile.image.url}}"
+        alt="profile picture"
+      />
+    </div>
+  </div>
 </section>
 {% endblock main %}

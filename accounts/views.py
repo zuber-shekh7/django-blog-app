@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, UserSignInForm
+from .forms import UserRegisterForm, UserSignInForm, UserUpdateForm, ProfileUpdateForm
 
 
 def signin(request):
@@ -46,7 +46,18 @@ def signout(request):
 
 @login_required
 def profile(request):
+    user_form = UserUpdateForm(instance=request.user)
+    profile_form = ProfileUpdateForm(instance=request.user.profile)
+    if request.method == 'POST':
+        user_form = UserUpdateForm(request.POST, instance=request.user)
+        profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        user_form.save()
+        profile_form.save()
+        messages.success(request, 'Profile updated successfully')
+        return redirect('accounts:profile')
     context = {
-        "user": request.user,
+        'user': request.user,
+        'user_form': user_form,
+        'profile_form': profile_form,
     }
     return render(request, 'accounts/profile.html', context)
