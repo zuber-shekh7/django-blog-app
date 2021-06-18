@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %} {% block main %}
+<section>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card mb-2">
+        <div class="card-body">
+          <h2><a href="#">{{post.title}}</a></h2>
+          <h2>{{post.author.username}}</h2>
+          <p class"lead">{{post.content}}</p>
+          {% if request.user == post.author %}
+          <div>
+            <a class="btn btn-primary" href="{% url 'blog:update-post' pk=post.id %}">Edit</a>
+            <a class="btn btn-danger" href="{% url 'blog:delete-post' pk=post.id %}">Delete</a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock main %}
