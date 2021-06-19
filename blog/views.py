@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render, get_object_or_404
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.urls import reverse
@@ -25,8 +26,17 @@ def create_post(request):
 
 @login_required
 def list_post(request):
+    post_list = Post.objects.all().order_by('-created_at')
+    page = request.GET.get('page', 1)
+    paginator = Paginator(post_list, 3)
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(1)
     context = {
-        'posts': Post.objects.all().order_by('-created_at')
+        'posts': posts,
     }
     return render(request, 'blog/list.html', context)
 
