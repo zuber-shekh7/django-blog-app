@@ -16,9 +16,11 @@
     <!-- NAVBAR -->
     {% include 'partials/navbar.html' %}
     <!-- MAIN -->
-    <main class="container mt-4">
+    <main class="container mt-4 vh-100">
       {% include 'partials/messages.html' %}{% block main %} {% endblock main%}
     </main>
+    <!-- FOOTER -->
+    {% include 'partials/footer.html' %}
     <!-- SCRIPTS -->
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
