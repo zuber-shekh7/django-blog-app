@@ -1,16 +1,32 @@
 {% extends 'core/base.html' %} {% block main %}
 <section>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-9 mx-auto">
       <div class="card mb-2">
         <div class="card-body">
-          <h2><a href="#">{{post.title}}</a></h2>
-          <h2>{{post.author.username}}</h2>
-          <p class"lead">{{post.content}}</p>
+          <h1 class="text-primary text-center">{{post.title}}</h1>
+          <hr />
+          <p class="lead">{{post.content}}</p>
+          <small class="float-right"
+            ><strong
+              >Created by : {{post.author.username}},
+              {{post.updated_at|timesince}} ago</strong
+            ></small
+          >
+        </div>
+        <div class="card-footer text-center">
           {% if request.user == post.author %}
           <div>
-            <a class="btn btn-primary" href="{% url 'blog:update-post' pk=post.id %}">Edit</a>
-            <a class="btn btn-danger" href="{% url 'blog:delete-post' pk=post.id %}">Delete</a>
+            <a
+              class="btn btn-primary"
+              href="{% url 'blog:update-post' pk=post.id %}"
+              >Edit</a
+            >
+            <a
+              class="btn btn-danger"
+              href="{% url 'blog:delete-post' pk=post.id %}"
+              >Delete</a
+            >
           </div>
           {% endif %}
         </div>
