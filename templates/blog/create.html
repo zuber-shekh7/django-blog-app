@@ -1,17 +1,26 @@
 {% extends 'core/base.html' %} {% load crispy_forms_tags %} {% block main %}
 <section>
   <div class="row">
-    <div class="col-md-6 mx-auto">
+    <div class="col-6 mx-auto">
       <div class="card">
+        <div class="card-header bg-dark text-light">
+          <h1 class="text-center">Create new post</h1>
+        </div>
         <div class="card-body">
           <form method="POST">
             {% csrf_token %}
+            <fieldset class="form-group">{{form|crispy}}</fieldset>
             <fieldset class="form-group">
-              <legend class="border-bottom mb-4">Create new post</legend>
-              {{form|crispy}}
-              <div class="form-group">
-                <input class="btn btn-primary" type="submit" value="Create" />
-              </div>
+              <input
+                class="btn btn-primary btn-block"
+                type="submit"
+                value="Create"
+              />
+              <a
+                class="btn btn-info btn-block"
+                href="{% url 'blog:list-post' %}"
+                >Back</a
+              >
             </fieldset>
           </form>
         </div>
