@@ -18,8 +18,7 @@ def signin(request):
             user = authenticate(request, username=username, password=password)
             if user:
                 login(request, user)
-                messages.success(request, f'{username} login successful')
-                return redirect('accounts:profile')
+                return redirect('blog:list-post')
     return render(request, 'accounts/signin.html', context)
 
 
