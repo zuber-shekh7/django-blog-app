@@ -27,8 +27,8 @@
             <div class="col-md-10">
               <small class="text-muted float-right">{{post.created_at|timesince}} ago</small>
               <a class="text-dark" href=""><h3>&commat;{{post.author.username}}</h2></a>
-              <a class="text-primary" href="{% url 'blog:detail-post' pk=post.id %}"><h4>{{post.title}}</h4></a>
-              <p class="lead">{{post.content}}</p>
+              <a class="text-primary" href="{% url 'blog:detail-post' pk=post.id %}"><h4>{{post.title|truncatechars:100}}</h4></a>
+              <p class="lead">{{post.content|truncatechars:100}}</p>
             </div>
           </div>
         </div>
