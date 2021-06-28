@@ -14,8 +14,20 @@ class UserRegisterForm(UserCreationForm):
 
 
 class UserSignInForm(forms.Form):
-    username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput())
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Enter username'
+            }
+        )
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                'placeholder': 'Enter password'
+            }
+        )
+    )
 
 
 
