@@ -4,7 +4,6 @@
     <div class="col mb-4 border-bottom">
       <div>
         <h1 class="float-left">Feed</h1>
-
         <a
           class="float-right btn btn-primary"
           href="{% url 'blog:create-post' %}"
@@ -12,8 +11,8 @@
         >
       </div>
     </div>
-    {% for post in posts%}
-    <div class="col-md-12">
+    {% for post in posts %}
+    <div class="col-12">
       <div class="card mb-2">
         <div class="card-body">
           <div class="row">
@@ -24,7 +23,7 @@
                 alt=""
               />
             </div>
-            <div class="col-md-10">
+            <div class="col-10">
               <small class="text-muted float-right">{{post.created_at|timesince}} ago</small>
               <a class="text-dark" href=""><h3>&commat;{{post.author.username}}</h2></a>
               <a class="text-primary" href="{% url 'blog:detail-post' pk=post.id %}"><h4>{{post.title|truncatechars:100}}</h4></a>
@@ -36,28 +35,35 @@
     </div>
     {% endfor %}
   </div>
-  <div class="col">
-    {% if posts.has_other_pages %}
-    <ul class="pagination">
-      {% if posts.has_previous %}
-      <li><a href="?page={{ posts.previous_page_number }}">&laquo;</a></li>
-      {% else %}
-      <li class="disabled"><span>&laquo;</span></li>
-      {% endif %} {% for i in posts.paginator.page_range %}
-      <br />
-      {% if posts.number == i %}
-      <li class="active">
-        <span>{{ i }} <span class="sr-only">(current)</span></span>
-      </li>
-      {% else %}
-      <li><a href="?page={{ i }}">{{ i }}</a></li>
-      {% endif %} {% endfor %} {% if posts.has_next %}
-      <li><a href="?page={{ posts.next_page_number }}">&raquo;</a></li>
-      {% else %}
-      <li class="disabled"><span>&raquo;</span></li>
-      {% endif %}
-    </ul>
-    {% endif %}
+  <div class="row">
+    <div class="col-6 mx-auto">
+      {% if posts.has_other_pages %}
+        <ul class="pagination">
+          {% if posts.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page={{ posts.previous_page_number }}">Previous</a></li>
+          {% else %}
+          <li class="page-item disabled"><span class="page-link">Previous</span></li>
+          {% endif %} 
+
+          {% for i in posts.paginator.page_range %}
+            {% if posts.number == i %}
+            <li class="page-item active">
+              <span class="page-link">{{ i }} <span class="sr-only">(current)</span></span>
+            </li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %} 
+          {% endfor %} 
+            
+            
+          {% if posts.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ posts.next_page_number }}">Next</a></li>
+          {% else %}
+          <li class="page-item disabled"><span class="page-link">Next</span></li>
+          {% endif %}
+        </ul>
+      {% endif %} 
+    </div>
   </div>
 </section>
 {% endblock main %}
