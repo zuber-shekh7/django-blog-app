@@ -4,12 +4,12 @@
     <div class="col-md-6 mx-auto">
       <form method="POST">
         <div class="card mt-4">
+          <div class="card-header bg-dark text-light">
+            <h1 class="text-center">Sign up</h1>
+          </div>
           <div class="card-body">
             {% csrf_token %}
-            <fieldset class="form-group">
-              <legend class="text-center border-bottom mt-4">Join now</legend>
-              {{form|crispy}}
-            </fieldset>
+            <fieldset class="form-group">{{form|crispy}}</fieldset>
             <div class="form-group">
               <input
                 class="btn btn-primary btn-block"
